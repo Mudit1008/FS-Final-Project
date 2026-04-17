@@ -1,47 +1,34 @@
 package com.example.expensetracker.controller;
 
+import com.example.expensetracker.model.Expense;
+import com.example.expensetracker.repository.ExpenseRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import com.example.expensetracker.model.Expense;
-import com.example.expensetracker.service.ExpenseService;
-
 @RestController
-
 @RequestMapping("/expenses")
-
-@CrossOrigin(origins = "http://localhost:3000")
-
+@CrossOrigin(origins = "*")
 public class ExpenseController {
 
-    private final ExpenseService service;
+    private final ExpenseRepository repository;
 
-    public ExpenseController(ExpenseService service) {
-
-        this.service = service;
-
+    public ExpenseController(ExpenseRepository repository){
+        this.repository = repository;
     }
 
     @GetMapping
-    public List<Expense> getAllExpenses() {
-
-        return service.getAllExpenses();
-
+    public List<Expense> getExpenses(){
+        return repository.findAll();
     }
 
     @PostMapping
-    public Expense addExpense(@RequestBody Expense expense) {
-
-        return service.addExpense(expense);
-
+    public Expense addExpense(@RequestBody Expense expense){
+        return repository.save(expense);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteExpense(@PathVariable Long id) {
-
-        service.deleteExpense(id);
-
+    public void deleteExpense(@PathVariable Long id){
+        repository.deleteById(id);
     }
-
 }

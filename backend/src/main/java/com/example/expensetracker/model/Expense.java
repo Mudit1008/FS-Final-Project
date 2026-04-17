@@ -9,31 +9,18 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private double amount;
-
+    private Double amount;
     private String category;
-
     private String description;
-
     private String date;
 
-    public Expense() {
-    }
-
-    public Expense(double amount, String category, String description, String date) {
-
-        this.amount = amount;
-        this.category = category;
-        this.description = description;
-        this.date = date;
-
-    }
+    public Expense() {}
 
     public Long getId() {
         return id;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
@@ -53,7 +40,7 @@ public class Expense {
         this.id = id;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
